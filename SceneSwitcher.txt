@@ -1,0 +1,27 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class SceneSwitcher : MonoBehaviour
+{
+    public string targetSceneName = "Main Menu";
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SwitchToTargetScene();
+        }
+    }
+
+    void SwitchToTargetScene()
+    {
+        if (!string.IsNullOrEmpty(targetSceneName))
+        {
+            SceneManager.LoadScene(targetSceneName);
+        }
+        else
+        {
+            Debug.LogWarning("Target scene name is not set in the inspector.");
+        }
+    }
+}

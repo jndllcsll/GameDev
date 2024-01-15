@@ -1,0 +1,38 @@
+using UnityEngine;
+
+public class ColorChangeScript : MonoBehaviour
+{
+    private SpriteRenderer spriteRenderer;
+    private Color[] rainbowColors = new Color[]
+    {
+        new Color(1f, 0f, 0f),   
+        new Color(1f, 0.5f, 0f), 
+        new Color(1f, 1f, 0f),  
+        new Color(0f, 1f, 0f),  
+        new Color(0f, 0f, 1f),  
+        new Color(0.5f, 0f, 1f), 
+        new Color(0.8f, 0.5f, 1f) 
+    };
+
+    private int currentIndex = 0;
+    public float changeInterval = 5f;
+
+    private void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        InvokeRepeating("ChangeColor", 0f, changeInterval);
+    }
+
+    private void ChangeColor()
+    {
+        if (rainbowColors.Length == 0)
+        {
+            Debug.LogError("No colors defined for the sprite!");
+            return;
+        }
+
+        spriteRenderer.color = rainbowColors[currentIndex];
+
+        currentIndex = (currentIndex + 1) % rainbowColors.Length;
+    }
+}

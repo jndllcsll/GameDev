@@ -1,0 +1,21 @@
+using UnityEngine;
+
+public class CollisionCheck : MonoBehaviour
+{
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            SpriteRenderer otherSpriteRenderer = collision.gameObject.GetComponent<SpriteRenderer>();
+
+            if (otherSpriteRenderer != null)
+            {
+                if (otherSpriteRenderer.color != GetComponent<SpriteRenderer>().color)
+                {
+                    Debug.Log("Game Over! Colors are different.");
+                    Time.timeScale = 0f;
+                }
+            }
+        }
+    }
+}
